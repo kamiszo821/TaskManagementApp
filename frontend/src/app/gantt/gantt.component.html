@@ -1,0 +1,18 @@
+<div class="gantt-container">
+<ejs-gantt
+    #gantt
+    id="ganttDefault"
+    height="100%" width="100%"
+    [dataSource]="data"
+    [taskFields]="taskSettings"
+    [editSettings]="editSettings"
+    [toolbar]="toolbar"
+    [enableCriticalPath]='true'
+    [allowSorting]= 'true'
+    [resourceFields]="resourceFields"
+    [resources]= "resources"
+    [labelSettings]="labelSettings"
+    (toolbarClick)="toolbarClick($event)" [allowPdfExport]='true'
+    (actionComplete)="handleActionComplete($event)">
+</ejs-gantt>
+</div>

@@ -1,0 +1,42 @@
+<div class="card">
+  <p-pickList
+    [source]="sourceUsers"
+    [target]="targetUsers"
+    sourceHeader="Available Users"
+    targetHeader="Team"
+    [dragdrop]="true"
+    [responsive]="true"
+    [sourceStyle]="{ height: '30rem' }"
+    [targetStyle]="{ height: '30rem' }"
+    filterBy="username"
+    sourceFilterPlaceholder="Search by username"
+    targetFilterPlaceholder="Search by username"
+    breakpoint="1400px">
+
+    <ng-template pTemplate="targetHeader">
+      <div class="custom-header">
+        <p-dropdown [options]="teams"
+                    [(ngModel)]="selectedTeam"
+                    optionLabel="name"
+                    placeholder="Select a Team">
+        </p-dropdown>
+        <p-button label="Submit" styleClass="submit-button" (click)="submitTeam()"></p-button>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="sourceHeader">
+      <div class="custom-header">
+        Available Users
+        <p-button label="Submit" [ngStyle]="{'visibility': 'hidden'}"></p-button>
+      </div>
+    </ng-template>
+
+    <ng-template let-user pTemplate="item">
+      <div class="flex flex-wrap p-2 align-items-center gap-3">
+        <div class="flex-1 flex flex-column gap-2">
+          <span class="font-bold">{{ user.username }}</span>
+        </div>
+      </div>
+    </ng-template>
+  </p-pickList>
+</div>

@@ -1,0 +1,67 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <div class="logo">
+      <i
+        *ngIf="isLoggedIn"
+        class="navbar-brand fa-solid fa-list ms-2 sidebar-icon"
+        [style]="{ color: '#fa8e42' }"
+        (click)="sidebarVisible = true"
+        pTooltip="Sidebar"
+      ></i>
+      <a class="navbar-brand" [style]="{ color: '#fa8e42', cursor: 'pointer' }" routerLink="/">TaskMGMT</a>
+    </div>
+
+    <p-sidebar [(visible)]="sidebarVisible">
+      <ng-template pTemplate="header"
+        ><div class="d-flex align-items-center">
+          <p-avatar
+            tooltipPosition="right"
+            icon="pi pi-user"
+            [style]="{ 'background-color': '#b75006' }"
+            size="large"
+            shape="circle"
+          ></p-avatar>
+          <p class="ms-3 mt-2 h4">{{ userName ? userName : "undefined" }}</p>
+        </div>
+      </ng-template>
+      <app-side-navbar></app-side-navbar>
+    </p-sidebar>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fa-solid fa-bars ms-2" [style]="{ color: '#e15c00' }"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ms-auto me-2">
+        <li class="nav-item">
+          <span
+            class="nav-link avatar"
+            pTooltip="Account"
+            tooltipPosition="bottom"
+            (click)="avatarMenu.toggle($event)"
+          >
+            <p-avatar
+              tooltipPosition="right"
+              icon="pi pi-user"
+              [style]="{ 'background-color': 'inherit' }"
+              shape="circle"
+            ></p-avatar>
+            {{ isLoggedIn ? userName : "Sign Up / Log In" }}
+          </span>
+        </li>
+      </ul>
+      <p-tieredMenu
+        #avatarMenu
+        [model]="menuItems"
+        [popup]="true"
+      ></p-tieredMenu>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,86 @@
+<div style="margin: 50px; display: flex; gap: 10px; justify-content: space-between;">
+  <div class="e-card" *ngIf="isMod" style="flex: 1; max-width:200%; max-height:200%">
+    <div class="e-card-actions"></div>
+    <div class="e-card-header-title">WIP Validation</div>
+    <div class="e-card-content"></div>
+    <div class="e-card-actions">
+      min:
+      <input type="number" [(ngModel)]="minCount" style="width: 50px;">
+      <div class="e-card-actions">
+        max:
+        <input type="number" [(ngModel)]="maxCount" style="width: 50px;">
+      </div>
+      <div class="e-card-actions">
+        <div class="control-section e-tbar-section">
+          <div class="control-section e-tbar-section">
+            <div class="e-sample-resize-container">
+              <span> COLUMN </span>
+              <ejs-switch onLabel="ON" offLabel="Column" [checked]="isSwimlaneMode" (change)="toggleMode()">
+              </ejs-switch>
+              <span> SWIMLANE </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="e-card" style="flex: 1; max-width: 50%">
+    <div class="e-card-header-title">Add Task</div>
+    <div class="e-card-content"></div>
+    <div class="e-card-actions">
+      <button class="e-card-btn">
+        <button ejs-button (click)="addTask()">Add Task</button>
+      </button>
+      <button class="e-card-btn">
+        <div>
+          <select [(ngModel)]="selectedUsername">
+            <option *ngFor="let user of users" [value]="user.value">{{ user.text }}</option>
+          </select>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+<ejs-kanban #kanbanObj keyField='Status' [dataSource]='data | async' [cardSettings]='cardSettings'
+  constraintType='{{ isSwimlaneMode ? "Swimlane" : "Column" }}' (dataStateChange)='dataStateChange($event)'
+  (dataSourceChanged)='dataSourceChanged($event)' [swimlaneSettings]='swimlaneSettings'
+  [dialogSettings]='dialogSettings' width='100%' height='auto'>
+
+  <e-columns #columns>
+    <e-column headerText='To Do' keyField='Open' allowToggle='true' [minCount]='minCount' [maxCount]='maxCount'
+      showAddButton='true'></e-column>
+    <e-column headerText='In Progress' keyField='InProgress' allowToggle='true' [minCount]='minCount'
+      [maxCount]='maxCount' showAddButton='true'></e-column>
+    <e-column headerText='Testing' keyField='Testing' allowToggle='true' [minCount]='minCount' [maxCount]='maxCount'
+      showAddButton='true'></e-column>
+    <e-column headerText='Done' keyField='Close' allowToggle='true'></e-column>
+  </e-columns>
+
+  <ng-template #cardSettingsTemplate let-data>
+    <div class='e-card-content'>
+      <table class="card-template-wrap">
+        <tbody>
+          <tr>
+            <td class="CardHeader">Id:</td>
+            <td>{{ data.Id }}</td>
+          </tr>
+          <tr>
+            <td class="CardHeader">Type:</td>
+            <td>{{ data.Type }}</td>
+          </tr>
+          <tr>
+            <td class="CardHeader">Priority:</td>
+            <td>{{ data.Priority }}</td>
+          </tr>
+          <tr>
+            <td class="CardHeader">Summary:</td>
+            <td>{{ data.Summary }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-template>
+</ejs-kanban>

@@ -1,0 +1,26 @@
+<div class="tree-table-container">
+<p-treeTable [value]="teamsTree" [scrollable]="true" [tableStyle]="{'min-width':'50rem'}">
+  <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+      <tr [ttRow]="rowNode">
+          <td>
+              <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+              {{ rowData.name }}
+          </td>
+          <td>
+              <ul *ngIf="rowNode.children">
+                  <li *ngFor="let childNode of rowNode.children">{{ childNode.data.name }}</li>
+              </ul>
+          </td>
+          <td>
+            {{ rowData.isProject ? '' :'' }}
+            <button *ngIf="rowData.isProject" (click)="navigateToKanbanTable(rowData.id)">Kanban Table</button>
+          </td>
+
+          <td>
+            {{ rowData.isProject ? '' :'' }}
+            <button *ngIf="rowData.isProject" (click)="navigateToGanttChart(rowData.id)">Gantt Chart</button>
+          </td>
+      </tr>
+  </ng-template>
+</p-treeTable>
+</div>

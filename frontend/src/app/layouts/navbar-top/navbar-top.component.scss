@@ -1,0 +1,18 @@
+.navbar {
+  background-color: #071426;
+}
+
+.nav-link {
+  color: white;
+  transition: color 0.3s ease-in;
+}
+
+.nav-link:hover {
+  color: #f97316;
+  border-radius: 10px;
+}
+
+.avatar,
+.sidebar-icon {
+  cursor: pointer;
+}
